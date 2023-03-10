@@ -11,5 +11,6 @@ namespace Clndrprjct.Data
         Task AddCalendarEventAsync(CalendarEvent calendarEvent);
         Task UpdateCalendarEventAsync(CalendarEvent calendarEvent);
         Task DeleteCalendarEventAsync(CalendarEvent calendarEvent);
+        bool CalendarEventExists(int id);
     }
 }
