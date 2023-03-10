@@ -1,4 +1,5 @@
 ﻿using Clndrprjct.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,5 +13,7 @@ namespace Clndrprjct.Data
         Task UpdateCalendarEventAsync(CalendarEvent calendarEvent);
         Task DeleteCalendarEventAsync(CalendarEvent calendarEvent);
         bool CalendarEventExists(int id);
+        Task<ActionResult<IEnumerable<CalendarEvent>>> GetCalendarEventsAsync();
+        Task GetCalendarEventAsync(int id);
     }
 }
