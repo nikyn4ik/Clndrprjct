@@ -14,6 +14,6 @@ namespace Clndrprjct.Data
         Task DeleteCalendarEventAsync(CalendarEvent calendarEvent);
         bool CalendarEventExists(int id);
         Task<ActionResult<IEnumerable<CalendarEvent>>> GetCalendarEventsAsync();
-        Task GetCalendarEventAsync(int id);
+        Task<CalendarEvent> GetCalendarEventAsync(int id);
     }
 }

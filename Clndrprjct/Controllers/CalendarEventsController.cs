@@ -48,7 +48,7 @@ namespace Clndrprjct.Controllers
         [HttpPost]
         public async Task<ActionResult<CalendarEvent>> PostCalendarEvent(CalendarEvent calendarEvent)
         {
-            if (calendarEvent.UserId != null && !_userRepository.UserExists(calendarEvent.UserId.Value))
+            if (calendarEvent.UserId != null && !_userRepository.UserExists(calendarEvent.UserId))
             {
                 return BadRequest("User does not exist.");
             }
@@ -67,7 +67,7 @@ namespace Clndrprjct.Controllers
                 return BadRequest();
             }
 
-            if (calendarEvent.UserId.HasValue && !_userRepository.UserExists(calendarEvent.UserId.Value))
+            if (!_userRepository.UserExists(calendarEvent.UserId))
             {
                 return BadRequest("User does not exist.");
             }
