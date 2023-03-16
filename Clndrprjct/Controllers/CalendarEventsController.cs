@@ -14,10 +14,10 @@ namespace Clndrprjct.Controllers
     [Route("api/[controller]")]
     public class CalendarEventsController : ControllerBase
     {
-        private readonly ICalendarEventRepository _calendarEventRepository;
+        private readonly CalendarEventRepository _calendarEventRepository;
         private readonly IUserRepository _userRepository;
 
-        public CalendarEventsController(ICalendarEventRepository calendarEventRepository, IUserRepository userRepository)
+        public CalendarEventsController(CalendarEventRepository calendarEventRepository, IUserRepository userRepository)
         {
             _calendarEventRepository = calendarEventRepository;
             _userRepository = userRepository;

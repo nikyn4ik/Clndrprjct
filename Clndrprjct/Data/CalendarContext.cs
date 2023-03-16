@@ -16,8 +16,8 @@ namespace Clndrprjct.Data
         {
         }
 
-        //public DbSet<User> Users { get; set; }
-        //public DbSet<CalendarEvent> CalendarEvents { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<Reminder> Reminders { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,15 +32,20 @@ namespace Clndrprjct.Data
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<User>()
-            //    .HasMany(e => e.CalendarEvents)
-            //    .WithOne(e => e.User)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<CalendarEvent>()
+                .HasOne(e => e.User)
+                .WithMany(e => e.CalendarEvents)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<User>()
-            //    .HasMany(e => e.Reminders)
-            //    .WithOne(e => e.User)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.CalendarEvents)
+                .WithOne(e => e.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Reminders)
+                .WithOne(e => e.User)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
