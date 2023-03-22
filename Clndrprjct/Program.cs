@@ -1,17 +1,11 @@
 using Clndrprjct.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<CalendarContext>(
+builder.Services.AddDbContext<UserContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
 );
 builder.Services.AddControllers();

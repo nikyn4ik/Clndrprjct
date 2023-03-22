@@ -2,8 +2,6 @@
 using Clndrprjct.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Clndrprjct.Controllers
 {
@@ -11,11 +9,11 @@ namespace Clndrprjct.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserRepository _userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(UserContext context)
         {
-            _userRepository = userRepository;
+            _userRepository = new UserRepository(context);
         }
 
         // GET: api/Users
@@ -27,7 +25,7 @@ namespace Clndrprjct.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser(Guid id)
         {
             var user = await _userRepository.GetUserAsync(id);
 
@@ -50,7 +48,7 @@ namespace Clndrprjct.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(Guid id, User user)
         {
             if (id != user.Id)
             {
@@ -59,11 +57,11 @@ namespace Clndrprjct.Controllers
 
             try
             {
-                await _userRepository.UpdateUserAsync(user);
+                _userRepository.UpdateUserAsync(user);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_userRepository.UserExists(id))
+                if (!(await _userRepository.UserExists(id)))
                 {
                     return NotFound();
                 }
@@ -78,7 +76,7 @@ namespace Clndrprjct.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
             var user = await _userRepository.GetUserAsync(id);
             if (user == null)
@@ -86,7 +84,7 @@ namespace Clndrprjct.Controllers
                 return NotFound();
             }
 
-            await _userRepository.DeleteUserAsync(user);
+            _userRepository.DeleteUserAsync(user);
 
             return NoContent();
         }

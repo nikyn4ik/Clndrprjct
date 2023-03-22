@@ -1,13 +1,11 @@
-﻿using Clndrprjct.Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Clndrprjct.Models
 {
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -25,8 +23,8 @@ namespace Clndrprjct.Models
         [StringLength(50)]
         public string Password { get; set; }
 
-        public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
+        public List<CalendarEvent> CalendarEvents { get; set; } = new();
 
-        public virtual ICollection<Reminder> Reminders { get; set; }
+        public List<Reminder> Reminders { get; set; } = new();
     }
 }

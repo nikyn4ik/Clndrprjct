@@ -1,13 +1,11 @@
-﻿using Clndrprjct.Models;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Clndrprjct.Models
 {
     public class Reminder
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -20,13 +18,8 @@ namespace Clndrprjct.Models
         public DateTime ReminderTime { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public virtual User User { get; set; }
-
-        [Required]
-        public int CalendarEventId { get; set; }
-
-        public virtual CalendarEvent CalendarEvent { get; set; }
+        public User User { get; set; }
     }
 }
