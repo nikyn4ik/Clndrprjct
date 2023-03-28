@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Clndrprjct.Models
 {
@@ -20,5 +22,8 @@ namespace Clndrprjct.Models
         [Required]
         public Guid UserId { get; set; }
 
+        [ValidateNever]
+        [JsonIgnore]
+        public User User { get; set; } = null!;
     }
 }

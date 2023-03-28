@@ -57,7 +57,7 @@ namespace Clndrprjct.Controllers
 
             try
             {
-                _userRepository.UpdateUserAsync(user);
+                await _userRepository.UpdateUserAsync(user);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,7 +84,7 @@ namespace Clndrprjct.Controllers
                 return NotFound();
             }
 
-            _userRepository.DeleteUserAsync(user);
+            await _userRepository.DeleteUserAsync(user);
 
             return NoContent();
         }
